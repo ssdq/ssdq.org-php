@@ -1,0 +1,39 @@
+div{
+	color: white;
+	font-weight:bold;
+	font-family: verdana;
+	font-size: 12px;
+             }
+
+
+a:link{
+	text-decoration: none;
+	color: white;
+	font-weight:bold;
+	font-family: verdana;
+	font-size: 12px;
+}
+
+a:visited{
+	text-decoration: none;
+	color: white;
+	font-weight:bold;
+	font-family: verdana;
+	font-size: 12px;	
+}
+
+a:active{
+	text-decoration: none;
+	color: yellow;
+	font-weight:bold;
+	font-family: verdana;
+	font-size: 12px;
+}
+
+a:hover{
+	text-decoration: none;
+	color: yellow;
+	font-weight:bold;
+	font-family: verdana;
+	font-size: 12px;
+}
