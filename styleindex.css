@@ -37,3 +37,8 @@ a:hover{
 	font-family: verdana;
 	font-size: 12px;
 }
+
+/*<update>*/
+#masterdiv .menutitle {
+    cursor: pointer;
+}
