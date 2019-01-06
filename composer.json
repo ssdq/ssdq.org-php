@@ -1,0 +1,19 @@
+{
+    "name": "dsinn/ssdq",
+    "description": "Website for the Serious Sam Done Quick speedrunning community",
+    "keywords": ["serious sam", "speedrun"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=7.2",
+        "kevinrob/guzzle-cache-middleware": "^3.2",
+        "dsinn/srcom-api-php": "dev-master@dev",
+        "doctrine/cache": "^1.8"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/dsinn/srcom-api-php.git"
+        }
+    ]
+}
