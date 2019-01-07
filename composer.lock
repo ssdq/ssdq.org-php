@@ -87,12 +87,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dsinn/srcom-api-php.git",
-                "reference": "bd12df4d765cdb35fc05c8cd0393a373637fb731"
+                "reference": "1b08bb8b3a5fcc4805922d0ee0002e9adcbb24c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dsinn/srcom-api-php/zipball/bd12df4d765cdb35fc05c8cd0393a373637fb731",
-                "reference": "bd12df4d765cdb35fc05c8cd0393a373637fb731",
+                "url": "https://api.github.com/repos/dsinn/srcom-api-php/zipball/1b08bb8b3a5fcc4805922d0ee0002e9adcbb24c9",
+                "reference": "1b08bb8b3a5fcc4805922d0ee0002e9adcbb24c9",
                 "shasum": ""
             },
             "require": {
@@ -124,7 +124,7 @@
                 "source": "https://github.com/dsinn/srcom-api-php/tree/master",
                 "issues": "https://github.com/dsinn/srcom-api-php/issues"
             },
-            "time": "2019-01-06T08:19:59+00:00"
+            "time": "2019-01-06T18:52:55+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
