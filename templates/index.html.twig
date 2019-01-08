@@ -1,0 +1,103 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block mainContainer %}
+    <h1 class="mt-5"><img height="48" src="logo.svg" alt /> Serious&nbsp;Sam Done&nbsp;Quick</h1>
+    <p class="lead">
+        We're currently under construction, but in the meantime, here are some links that you may find useful:
+    </p>
+    <div class="list-group list-group-flush mb-5">
+        <a class="list-group-item list-group-item-action" href="https://www.speedrun.com/serious_sam" target="_blank"><img height="32" src="speedrun_com.png" alt="speedrun.com" /></a>
+        <a class="list-group-item list-group-item-action" href="https://discord.gg/0vKwJa1xQoCpw7vY" target="_blank"><img height="32" src="discord.svg" alt="Discord" /></a>
+    </div>
+
+    <h2>Latest runs</h2>
+    <p class="mt-4">
+        The latest runs in the main games of the series. See the full leaderboards at <a href="https://www.speedrun.com/serious_sam">speedrun.com</a>.
+    </p>
+
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Game</th>
+            <th scope="col">Category</th>
+            <th scope="col">Level</th>
+            <th scope="col">Player(s)</th>
+            <th scope="col">Time</th>
+        </tr>
+        </thead>
+        <tbody>
+            {# @var run \Dsinn\SrcomApi\DataTypes\Run #}
+            {% for run in latestRuns %}
+                <tr style="cursor: pointer" onclick="window.location = 'https://www.speedrun.com/{{ run.getGame().getAbbreviation() }}/run/{{ run.getId() }}';">
+                <td>{{ run.getSubmitted().format('Y-m-d') }}</td>
+                <td>{{ run.getGame().getNames().getInternational() }}</td>
+                <td>{{ run.getCategory().getName() }}</td>
+                <td>{{ run.getLevel().getName() ?? '' }}</td>
+                <td>
+                    {% for player in run.getPlayers() %}
+                        {{ player.getNameStyle().getDarkHTML(player.getNames().getInternational())|raw }}
+                        {% if not loop.last %}<br />{% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ run.getTimes().getLowestTime().getString() }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <th scope="colgroup" colspan="6" class="text-center">Error connecting to speedrun.com</th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>World records</h2>
+    <p class="mt-4">
+        A selective listing of records. See the full leaderboards at <a href="https://www.speedrun.com/serious_sam">speedrun.com</a>.
+    </p>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Game</th>
+            <th scope="col">Category</th>
+            <th scope="col">Player(s)</th>
+            <th scope="col">Time</th>
+            <th scope="col">Date</th>
+        </tr>
+        </thead>
+        <tbody>
+            {# @var row \App\Helper\WorldRecordRow #}
+            {% for row in worldRecords %}
+                {% set leaderboard = row.getLeaderboard() %}
+                {% set run = row.getRun() %}
+                <tr style="cursor: pointer" onclick="window.location = '{{ run.getWeblink() }}';">
+                    <td>{{ leaderboard.getGame().getNames().getInternational() }}</td>
+                    <td>
+                        {{ leaderboard.getCategory().getName() }}
+                        {{ row.getSubcategory() }}
+                    </td>
+                    <td>
+                        {% for player in run.getPlayers() %}
+                            {% set realPlayer = leaderboard.getPlayers()[player.getId()] %}
+                            {% set nameStyle = realPlayer.getNameStyle() %}
+                            {% if realPlayer and nameStyle %}
+                                {{ realPlayer.getNameStyle().getDarkHTML(realPlayer.getNames().getInternational())|raw }}
+                            {% else %}
+                                {{ player.getName() }}
+                            {% endif %}
+                            {% if not loop.last %}<br />{% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ run.getTimes().getLowestTime().getString() }}</td>
+                    <td>{{ run.getSubmitted().format('Y-m-d') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Contact</h2>
+    <p>Please contact <em>mr.deagle#6969</em> on our <a href="https://discord.gg/0vKwJa1xQoCpw7vY" target="_blank">Discord server</a>.</p>
+
+    <p>For the old site that was maintained by TheVoiid, click <a href="legacy.html">here</a>.</p>
+{% endblock %}
