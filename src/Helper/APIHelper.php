@@ -2,6 +2,7 @@
 namespace App\Helper;
 
 use Dsinn\SrcomApi\Client\DataTypes\Run;
+use Dsinn\SrcomApi\Client\DataTypes\Status;
 use Dsinn\SrcomApi\Client\Getters\Runs;
 
 class APIHelper
@@ -29,7 +30,7 @@ class APIHelper
                 'xldeoe63', //sshdtse
             ] as $gameId) {
                 $runs = array_merge($runs, $this->apiClient->runs()->getList(
-                    [Runs::FILTER_GAME => $gameId],
+                    [Runs::FILTER_GAME => $gameId, Runs::FILTER_STATUS => Status::STATUS_VERIFIED],
                     Runs::ORDER_BY_DATE,
                     Runs::ORDER_DIRECTION_DESC
                 ));

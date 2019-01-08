@@ -1184,12 +1184,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dsinn/srcom-api-php.git",
-                "reference": "1b08bb8b3a5fcc4805922d0ee0002e9adcbb24c9"
+                "reference": "53926c402fa69e1bae7b41bdc0d8f50d92675898"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dsinn/srcom-api-php/zipball/1b08bb8b3a5fcc4805922d0ee0002e9adcbb24c9",
-                "reference": "1b08bb8b3a5fcc4805922d0ee0002e9adcbb24c9",
+                "url": "https://api.github.com/repos/dsinn/srcom-api-php/zipball/53926c402fa69e1bae7b41bdc0d8f50d92675898",
+                "reference": "53926c402fa69e1bae7b41bdc0d8f50d92675898",
                 "shasum": ""
             },
             "require": {
@@ -1221,7 +1221,7 @@
                 "source": "https://github.com/dsinn/srcom-api-php/tree/master",
                 "issues": "https://github.com/dsinn/srcom-api-php/issues"
             },
-            "time": "2019-01-06T18:52:55+00:00"
+            "time": "2019-01-08T16:44:58+00:00"
         },
         {
             "name": "egulias/email-validator",
