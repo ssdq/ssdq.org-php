@@ -5,7 +5,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.1",
         "doctrine/cache": "^1.8",
         "dsinn/srcom-api-php": "dev-master@dev",
         "ext-ctype": "*",
