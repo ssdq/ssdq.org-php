@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    srcom.api.base_uri: !php/const 'Dsinn\SrcomApi\Client::DEFAULT_BASE_URI'
 
 services:
     # default configuration for services in *this* file
@@ -24,5 +25,47 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\Controller\DefaultController:
+        arguments: ['@srcom.api.helper']
+
+    cache.filesystem:
+        class: 'Doctrine\Common\Cache\FilesystemCache'
+        arguments: ['%sys_get_temp_dir%']
+
+    http.client:
+        class: 'GuzzleHttp\Client'
+        arguments:
+            - base_uri: '%srcom.api.base_uri%'
+              handler: '@http.handlerstack'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    http.cache.middleware:
+        class: 'Kevinrob\GuzzleCache\CacheMiddleware'
+        arguments: ['@http.cache.strategy']
+
+    http.cache.storage:
+        class: 'Kevinrob\GuzzleCache\Storage\DoctrineCacheStorage'
+        arguments:
+            - '@cache.filesystem'
+
+    http.cache.strategy:
+        class: 'Kevinrob\GuzzleCache\Strategy\GreedyCacheStrategy'
+        arguments:
+            - '@http.cache.storage'
+            - 1800
+
+    http.handlerstack:
+        class: 'GuzzleHttp\HandlerStack'
+        factory: ['GuzzleHttp\HandlerStack', create]
+        calls:
+            - [push, ['@http.cache.middleware']]
+
+    srcom.api.client:
+        class: 'Dsinn\SrcomApi\Client'
+        arguments: ['@http.client']
+
+    srcom.api.helper:
+        class: 'App\Helper\APIHelper'
+        arguments: ['@srcom.api.client']
