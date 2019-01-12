@@ -2,11 +2,14 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>{% block fulltitle %}Serious Sam Done Quick{% if block('title') is defined %} &ndash; {% block title %}{% endblock %}{% endif %}{% endblock %}</title>
+        <meta name="description" content="Website for the Serious Sam Done Quick speedrunning community." />
+        <meta name="theme-color" content="#272b30" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{% block fulltitle %}Serious Sam Done Quick{% if block('title') is not empty %} &ndash; {% block title %}{% endblock %}{% endif %}{% endblock %}</title>
         {% block headAssets %}
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/slate/bootstrap.min.css" />
-            <link rel="stylesheet" href="bfe.css" />
+            <link rel="manifest" href="/ssdq.webmanifest" />
         {% endblock %}
     </head>
     <body>
@@ -14,6 +17,19 @@
             <main class="container">
                 {% block mainContainer %}{% endblock %}
             </main>
+            <footer class="container-fluid font-small text-center border-top pt-3 pb-3">
+                <div>&copy; SSDQ 2018&ndash;{{ "now"|date("Y") }}</div>
+                <div>Logo by <a href="https://www.deviantart.com/balthassar/">Balthazar</a>.</div>
+            </footer>
+            {% block footerAssets %}
+                <link rel="stylesheet" href="/ssdq.css" />
+                <link rel="stylesheet" href="/bfe.css" />
+                <script>
+                    if ('serviceWorker' in navigator) {
+                        navigator.serviceWorker.register('service_worker.js', {scope: './'});
+                    }
+                </script>
+            {% endblock %}
         {% endblock %}
     </body>
 </html>

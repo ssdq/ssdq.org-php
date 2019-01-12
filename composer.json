@@ -1,6 +1,6 @@
 {
     "name": "dsinn/ssdq",
-    "description": "Website for the Serious Sam Done Quick speedrunning community",
+    "description": "Website for the Serious Sam Done Quick speedrunning community.",
     "keywords": ["serious sam", "speedrun"],
     "license": "MIT",
     "type": "project",

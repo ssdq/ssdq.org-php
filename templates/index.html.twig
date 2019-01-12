@@ -1,23 +1,22 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Home{% endblock %}
-
 {% block mainContainer %}
-    <h1 class="mt-5"><img height="48" src="logo.svg" alt /> Serious&nbsp;Sam Done&nbsp;Quick</h1>
-    <p class="lead">
-        We're currently under construction, but in the meantime, here are some links that you may find useful:
-    </p>
-    <div class="list-group list-group-flush mb-5">
-        <a class="list-group-item list-group-item-action" href="https://www.speedrun.com/serious_sam" target="_blank"><img height="32" src="speedrun_com.png" alt="speedrun.com" /></a>
-        <a class="list-group-item list-group-item-action" href="https://discord.gg/0vKwJa1xQoCpw7vY" target="_blank"><img height="32" src="discord.svg" alt="Discord" /></a>
+    <h1 class="text-center"><img height="48" src="/logo.svg" alt /> Serious&nbsp;Sam Done&nbsp;Quick</h1>
+
+    <div class="text-center">
+        <div class="list-group list-group-flush d-inline-block text-center mb-5">
+            <a class="list-group-item list-group-item-action" href="https://discord.gg/0vKwJa1xQoCpw7vY" rel="noopener" target="_blank">Come say hi on <img class="ml-1" height="32" src="/discord.svg" alt="Discord" />!</a>
+            <a class="list-group-item list-group-item-action" href="https://www.speedrun.com/serious_sam" rel="noopener" target="_blank"><img height="32" src="/speedrun_com.png" alt="speedrun.com" /></a>
+            <a class="list-group-item list-group-item-action" href="/legacy.html" rel="noopener" target="_blank">Legacy site (2007&ndash;2012)</a>
+        </div>
     </div>
 
     <h2>Latest runs</h2>
-    <p class="mt-4">
-        The latest runs in the main games of the series. See the full leaderboards at <a href="https://www.speedrun.com/serious_sam">speedrun.com</a>.
+    <p>
+        The latest runs in the main games of the series. See the full leaderboards at <a href="https://www.speedrun.com/serious_sam" rel="noreferrer">speedrun.com</a>.
     </p>
 
-    <table class="table table-hover">
+    <table class="table table-hover latest-runs">
         <thead class="thead-dark">
         <tr>
             <th scope="col">Date</th>
@@ -31,12 +30,15 @@
         <tbody>
             {# @var run \Dsinn\SrcomApi\DataTypes\Run #}
             {% for run in latestRuns %}
-                <tr style="cursor: pointer" onclick="window.location = 'https://www.speedrun.com/{{ run.getGame().getAbbreviation() }}/run/{{ run.getId() }}';">
+                <tr onclick="window.location = 'https://www.speedrun.com/{{ run.getGame().getAbbreviation() }}/run/{{ run.getId() }}';">
                 <td>{{ run.getSubmitted().format('Y-m-d') }}</td>
-                <td>{{ run.getGame().getNames().getInternational() }}</td>
+                <td>
+                    <span class="d-lg-none">{{ run.getGame().getAbbreviation() }}</span>
+                    <span class="d-none d-lg-block">{{ run.getGame().getNames().getInternational() }}</span>
+                </td>
                 <td>{{ run.getCategory().getName() }}</td>
                 <td>{{ run.getLevel().getName() ?? '' }}</td>
-                <td>
+                <td class="player-names">
                     {% for player in run.getPlayers() %}
                         {{ player.getNameStyle().getDarkHTML(player.getNames().getInternational())|raw }}
                         {% if not loop.last %}<br />{% endif %}
@@ -53,8 +55,8 @@
     </table>
 
     <h2>World records</h2>
-    <p class="mt-4">
-        A selective listing of records. See the full leaderboards at <a href="https://www.speedrun.com/serious_sam">speedrun.com</a>.
+    <p>
+        A selective listing of records. See the full leaderboards at <a href="https://www.speedrun.com/serious_sam" rel="noreferrer">speedrun.com</a>.
     </p>
     <table class="table table-hover">
         <thead class="thead-dark">
@@ -72,12 +74,15 @@
                 {% set leaderboard = row.getLeaderboard() %}
                 {% set run = row.getRun() %}
                 <tr style="cursor: pointer" onclick="window.location = '{{ run.getWeblink() }}';">
-                    <td>{{ leaderboard.getGame().getNames().getInternational() }}</td>
+                    <td>
+                        <span class="d-lg-none">{{ leaderboard.getGame().getAbbreviation() }}</span>
+                        <span class="d-none d-lg-block">{{ leaderboard.getGame().getNames().getInternational() }}</span>
+                    </td>
                     <td>
                         {{ leaderboard.getCategory().getName() }}
                         {{ row.getSubcategory() }}
                     </td>
-                    <td>
+                    <td class="player-names">
                         {% for player in run.getPlayers() %}
                             {% set realPlayer = leaderboard.getPlayers()[player.getId()] %}
                             {% set nameStyle = realPlayer.getNameStyle() %}
@@ -97,7 +102,5 @@
     </table>
 
     <h2>Contact</h2>
-    <p>Please contact <em>mr.deagle#6969</em> on our <a href="https://discord.gg/0vKwJa1xQoCpw7vY" target="_blank">Discord server</a>. Alternatively, use the <a href="https://github.com/dsinn/ssdq/issues">issue tracker on GitHub</a>.</p>
-
-    <p>For the old site that was maintained by TheVoiid, click <a href="legacy.html">here</a>.</p>
+    <p>Please contact <em>mr.deagle#6969</em> on our <a href="https://discord.gg/0vKwJa1xQoCpw7vY" rel="noopener" target="_blank">Discord server</a>. Alternatively, use the <a href="https://github.com/dsinn/ssdq/issues">issue tracker on GitHub</a>.</p>
 {% endblock %}
