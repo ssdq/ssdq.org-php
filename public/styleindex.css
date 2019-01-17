@@ -42,3 +42,7 @@ a:hover{
 #masterdiv .menutitle {
     cursor: pointer;
 }
+
+.menutitle-text:hover {
+	color: yellow;
+}
