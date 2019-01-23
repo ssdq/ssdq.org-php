@@ -1,0 +1,29 @@
+{# @var row \App\Helper\WorldRecordRow #}
+{% for row in runs %}
+    {% set leaderboard = row.getLeaderboard() %}
+    {% set run = row.getRun() %}
+    <tr style="cursor: pointer" onclick="window.location = '{{ run.getWeblink() }}';">
+        <td>
+            <span class="d-lg-none">{{ leaderboard.getGame().getAbbreviation() }}</span>
+            <span class="d-none d-lg-block">{{ leaderboard.getGame().getNames().getInternational() }}</span>
+        </td>
+        <td>
+            {{ leaderboard.getCategory().getName() }}
+            {{ row.getSubcategory() }}
+        </td>
+        <td class="player-names">
+            {% for player in run.getPlayers() %}
+                {% set realPlayer = leaderboard.getPlayers()[player.getId()] %}
+                {% set nameStyle = realPlayer.getNameStyle() %}
+                {% if realPlayer and nameStyle %}
+                    {{ realPlayer.getNameStyle().getDarkHTML(realPlayer.getNames().getInternational())|raw }}
+                {% else %}
+                    {{ player.getName() }}
+                {% endif %}
+                {% if not loop.last %}<br />{% endif %}
+            {% endfor %}
+        </td>
+        <td>{{ run.getTimes().getLowestTime().getString() }}</td>
+        <td>{{ run.getSubmitted().format('Y-m-d') }}</td>
+    </tr>
+{% endfor %}

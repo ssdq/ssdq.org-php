@@ -16,9 +16,16 @@ class DefaultController extends AbstractController
 
     public function index()
     {
-        return $this->render('index.html.twig', [
-            'latestRuns' => $this->srcomAPIHelper->getLatestRuns(),
-            'worldRecords' => $this->srcomAPIHelper->getWorldRecords(),
-        ]);
+        return $this->render('index.html.twig');
+    }
+
+    public function latestRuns()
+    {
+        return $this->render('ajax/latest_runs.html.twig', ['runs' => $this->srcomAPIHelper->getLatestRuns()]);
+    }
+
+    public function worldRecords()
+    {
+        return $this->render('ajax/world_records.html.twig', ['runs' => $this->srcomAPIHelper->getWorldRecords()]);
     }
 }
