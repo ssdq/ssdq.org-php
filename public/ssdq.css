@@ -14,11 +14,11 @@ th, td {
     word-wrap: break-word;
 }
 
-.latest-runs tr:nth-child(n+5) {
+.latest-runs tr:nth-child(n+6) {
     display: none;
 }
 @media (min-width: 768px) {
-    .latest-runs tr:nth-child(n+5) {
+    .latest-runs tr:nth-child(n+6) {
         display: table-row;
     }
 }
