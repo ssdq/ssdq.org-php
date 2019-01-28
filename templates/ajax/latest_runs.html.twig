@@ -1,0 +1,23 @@
+{# @var run \Dsinn\SrcomApi\DataTypes\Run #}
+{% for run in runs %}
+    <tr onclick="window.location = '{{ run.getWeblink() }}';">
+        <td>{{ run.getSubmitted().format('Y-m-d') }}</td>
+        <td>
+            <span class="d-lg-none">{{ run.getGame().getAbbreviation() }}</span>
+            <span class="d-none d-lg-block">{{ run.getGame().getNames().getInternational() }}</span>
+        </td>
+        <td>{{ run.getCategory().getName() }}</td>
+        <td>{{ run.getLevel().getName() ?? '' }}</td>
+        <td class="player-names">
+            {% for player in run.getPlayers() %}
+                {{ player.getNameStyle().getDarkHTML(player.getNames().getInternational())|raw }}
+                {% if not loop.last %}<br />{% endif %}
+            {% endfor %}
+        </td>
+        <td>{{ run.getTimes().getLowestTime().getString() }}</td>
+    </tr>
+{% else %}
+    <tr>
+        <th scope="colgroup" colspan="6" class="text-center">Error connecting to speedrun.com</th>
+    </tr>
+{% endfor %}
