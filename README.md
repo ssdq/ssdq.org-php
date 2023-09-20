@@ -1,7 +1,7 @@
-# ssdq.org
-Website for the Serious Sam Done Quick speedrunning community at https://ssdq.org.
+# ssdq.org-php
+Former website for the Serious Sam Done Quick speedrunning community at <https://ssdq.org>.
 
-Master branch of the legacy page at https://ssdq.github.io/ssdq.org/public_html/legacy.html
+The "new" website repo can be found at <https://github.com/ssdq/ssdq.org>.
 
 ## Local development environment instructions
 
